@@ -1,0 +1,79 @@
+/* src/index.css */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Import react-big-calendar base CSS - BEFORE @tailwind directives */
+@import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Layer Styles */
+@layer base {
+  :root { /* ... CSS Variables remain the same ... */
+    --background: 0 0% 100%; --foreground: 222 47% 11%; --card: 0 0% 100%; --card-foreground: 222 47% 11%; --popover: 0 0% 100%; --popover-foreground: 222 47% 11%; --primary: 220 36% 13%; --primary-foreground: 210 40% 98%; --secondary: 45 75% 51%; --secondary-foreground: 222 47% 11%; --muted: 210 40% 96.1%; --muted-foreground: 215.4 16.3% 46.9%; --accent: 218 21% 30%; --accent-foreground: 210 40% 98%; --destructive: 0 84.2% 60.2%; --destructive-foreground: 210 40% 98%; --border: 214.3 31.8% 91.4%; --input: 214.3 31.8% 91.4%; --ring: 220 36% 13%; --radius: 0.5rem; --sidebar-background: 220 36% 13%; --sidebar-foreground: 0 0% 100%; --sidebar-primary: 45 75% 51%; --sidebar-primary-foreground: 220 36% 13%; --sidebar-accent: 218 21% 30%; --sidebar-accent-foreground: 0 0% 100%; --sidebar-border: 218 21% 35%; --sidebar-ring: 45 75% 51%; --font-sans: 'Inter', sans-serif; --font-poppins: 'Poppins', sans-serif;
+  }
+  .dark { /* ... Dark mode overrides ... */ }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground font-sans antialiased; }
+  h1, h2, h3, h4, h5, h6 { @apply font-poppins; }
+}
+
+/* Utility Layer Styles */
+@layer utilities { .text-balance { text-wrap: balance; } .text-shadow { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); } }
+
+
+/* --- START: react-big-calendar Overrides --- */
+/* ... .rbc-* styles remain the same ... */
+.rbc-calendar { @apply font-sans text-sm; }
+.rbc-toolbar { @apply mb-4 flex flex-wrap items-center justify-between gap-2 p-1; border: none; }
+.rbc-toolbar .rbc-toolbar-label { @apply text-xl font-poppins font-semibold text-navy-900 flex-grow text-center sm:text-left order-first sm:order-none; }
+.rbc-btn-group { @apply flex items-center gap-1; }
+.rbc-btn-group button, .rbc-toolbar button { @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50; @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground; @apply px-3 py-1 h-8; border-color: var(--border) !important; box-shadow: none; }
+.rbc-btn-group button:focus-visible, .rbc-toolbar button:focus-visible { box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring); }
+.rbc-btn-group button.rbc-active, .rbc-toolbar button.rbc-active { @apply bg-primary text-primary-foreground hover:bg-primary/90; border-color: var(--primary) !important; }
+.rbc-calendar-container .rbc-month-view, .rbc-calendar-container .rbc-time-grid, .rbc-calendar-container .rbc-day-view, .rbc-calendar-container .rbc-agenda-view { @apply border border-border rounded-md overflow-hidden bg-card; }
+.rbc-header { @apply p-2 text-center font-medium text-xs uppercase tracking-wider border-b border-r border-border text-muted-foreground bg-muted/50; }
+.rbc-header:last-child { @apply border-r-0; }
+.rbc-month-view .rbc-day-bg { @apply border-l border-t border-border; }
+.rbc-month-view .rbc-row:first-child .rbc-day-bg { border-top: none; }
+.rbc-month-view .rbc-day-bg:first-child { @apply border-l-0; }
+.rbc-month-view .rbc-date-cell { @apply p-1 text-right text-xs font-medium; }
+.rbc-month-view .rbc-date-cell.rbc-now { @apply font-bold text-primary; }
+.rbc-month-view .rbc-off-range-bg { @apply bg-slate-50/60; }
+.rbc-month-view .rbc-off-range .rbc-date-cell { @apply text-slate-400 opacity-70; }
+.rbc-month-view .rbc-today { @apply bg-blue-50; }
+.rbc-time-view .rbc-header { @apply border-b-2 border-border; }
+.rbc-time-header-content { @apply border-l border-border; }
+.rbc-time-header-content .rbc-header:first-child { @apply border-l-0; }
+.rbc-time-content { @apply border-t border-border; border-top-width: 1px !important; }
+.rbc-time-gutter { @apply border-r border-border bg-muted/30; }
+.rbc-timeslot-group { @apply border-b border-border; min-height: 40px; }
+.rbc-day-slot .rbc-time-slot { @apply border-t border-border/50; }
+.rbc-label { @apply p-2 text-right text-xs text-muted-foreground sticky top-0 bg-muted/30 z-10; }
+.rbc-current-time-indicator { @apply bg-primary opacity-90 p-0; height: 2px !important; }
+.rbc-day-slot .rbc-today { @apply bg-blue-50/70; }
+.rbc-event { @apply p-1 rounded-sm text-xs cursor-pointer transition-opacity duration-150 ease-in-out flex items-start gap-1; border: 1px solid transparent !important; outline: none !important; box-shadow: theme('boxShadow.sm'); color: white !important; }
+.rbc-event:focus-within, .rbc-event:focus { opacity: 1; box-shadow: 0 0 0 2px var(--ring); }
+.rbc-event.rbc-selected { box-shadow: theme('boxShadow.md'); opacity: 1; }
+.rbc-event-label, .rbc-event-content { @apply truncate text-xs leading-tight; }
+.rbc-show-more { @apply text-xs text-primary hover:underline mt-1 cursor-pointer block text-center px-1; background: none; border: none; padding: 0.1rem 0; margin: 0; }
+.rbc-agenda-view table { @apply border-collapse w-full border border-border; }
+.rbc-agenda-view table thead th { @apply p-2 text-left border-b-2 border-border bg-muted/50 text-sm font-medium text-muted-foreground uppercase tracking-wider; }
+.rbc-agenda-view table tbody tr:hover { @apply bg-muted/40; }
+.rbc-agenda-view table tbody tr td { @apply p-3 border-b border-border align-top text-sm; }
+.rbc-agenda-date-cell, .rbc-agenda-time-cell { @apply font-semibold whitespace-nowrap pr-4 text-navy-800 w-32; }
+.rbc-agenda-event-cell .rbc-event { box-shadow: none; margin-bottom: 2px; }
+.rbc-overlay { @apply absolute z-50 border border-border rounded-md bg-popover p-2 shadow-lg text-popover-foreground; min-width: 180px; }
+.rbc-overlay-header { @apply text-sm font-medium border-b border-border pb-1 mb-2 text-center; }
+.rbc-overlay .rbc-event { @apply mb-1 shadow-none; }
+/* --- END: react-big-calendar Overrides --- */
+
+/* --- REMOVED: react-day-picker Overrides (.custom-rdp) --- */
+/* Styling is now handled via classNames prop in CalendarPage.tsx */
